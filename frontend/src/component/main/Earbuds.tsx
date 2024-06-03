@@ -24,7 +24,9 @@ interface headphone {
       batteryLife: string;
     };
   };
-  picture: { [picture: string]: string };
+  picture: {
+    [color: string]: string[];
+  };
   colorCode: string[];
   price: string;
 }
@@ -204,41 +206,33 @@ function Earbuds() {
                     {selectProduct === product.name ? (
                       <>
                         <div className="flex flex-col justify-center items-center text-center">
-                          {pickColorPro === "" ? (
-                            <>
-                              <div className="slide">
-                                <img
-                                  src={product.picture.black}
-                                  alt="product"
-                                />
-                              </div>
-                            </>
-                          ) : (
-                            <>
-                              {Object.keys(product.picture).map(
-                                (keysPicture) => {
-                                  return (
-                                    <>
-                                      {keysPicture === pickColorPro ? (
-                                        <>
-                                          <div className="slide">
-                                            <img
-                                              src={
-                                                product.picture[pickColorPro][0]
-                                              }
-                                              alt="product"
-                                            />
-                                          </div>
-                                        </>
-                                      ) : (
-                                        <></>
+                          {Object.keys(product.picture).map((keysPicture) => {
+                            return (
+                              <>
+                                {keysPicture === pickColorPro ? (
+                                  <>
+                                    <div className="slide flex overflow-scroll snap-mandatory snap-always snap-start overflow-x-auto snap-x">
+                                      {product.picture[pickColorPro].map(
+                                        (image) => {
+                                          return (
+                                            <>
+                                              <img
+                                                src={image}
+                                                alt="product color"
+                                                className="snap-center"
+                                              />
+                                            </>
+                                          );
+                                        }
                                       )}
-                                    </>
-                                  );
-                                }
-                              )}
-                            </>
-                          )}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                              </>
+                            );
+                          })}
                           <p className="text-xl w-10/12 font-bold">
                             {product.name}
                           </p>
