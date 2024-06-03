@@ -3,7 +3,10 @@ import Footer from "../footer/Footer";
 import Nav from "../header/Nav";
 import "./home.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectProductFormNav, selectCategory } from "../redux/slicer.ts";
 function Home() {
+  const dispatch = useDispatch();
   const [slide, setSlide] = useState(0);
   return (
     <>
@@ -12,7 +15,7 @@ function Home() {
         <section className="flex justify-center items-center max-w-lg">
           <div className=" bg-white mt-5 rounded-lg w-11/12">
             <div className="text-center">
-              <p className="font-bold underline text-2xl ">New Arrival</p>
+              <p className="font-bold  text-2xl ">New Arrival</p>
             </div>
             {slide === 0 ? (
               <>
@@ -32,21 +35,28 @@ function Home() {
                     >
                       &lt;
                     </button>
-                    <div>
-                      <figure>
-                        <img
-                          src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MQTR3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1687660671097"
-                          alt="Image 1"
-                          className="w-7/12"
-                        />
-                      </figure>
-                      <div className="card-body p-3 ">
-                        <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
-                          Beats Studio Pro
-                          <div className="badge bg-green-400 p-3">NEW</div>
-                        </h2>
+                    <Link to="/headphone">
+                      <div
+                        onClick={() => {
+                          dispatch(selectProductFormNav("Beats Studio Pro"));
+                          dispatch(selectCategory("Headphone"));
+                        }}
+                      >
+                        <figure>
+                          <img
+                            src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MQTR3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1687660671097"
+                            alt="Image 1"
+                            className="w-7/12"
+                          />
+                        </figure>
+                        <div className="card-body p-3 ">
+                          <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
+                            Beats Studio Pro
+                            <div className="badge bg-green-400 p-3">NEW</div>
+                          </h2>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                     <button
                       className="btn btn-error text-white   btn-sm "
                       onClick={() => {
@@ -85,21 +95,28 @@ function Home() {
                     >
                       &lt;
                     </button>
-                    <div>
-                      <figure>
-                        <img
-                          src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MQLH3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1682361480584"
-                          alt="Image 1"
-                          className="w-7/12"
-                        />
-                      </figure>
-                      <div className="card-body p-3 ">
-                        <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
-                          Beats Solo 4
-                          <div className="badge bg-green-400 p-3">NEW</div>
-                        </h2>
+                    <Link to="/headphone">
+                      <div
+                        onClick={() => {
+                          dispatch(selectProductFormNav("Beats Solo 4"));
+                          dispatch(selectCategory("Headphone"));
+                        }}
+                      >
+                        <figure>
+                          <img
+                            src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MUW23?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1712255585028"
+                            alt="Image 1"
+                            className="w-7/12"
+                          />
+                        </figure>
+                        <div className="card-body p-3 ">
+                          <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
+                            Beats Solo 4
+                            <div className="badge bg-green-400 p-3">NEW</div>
+                          </h2>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                     <button
                       className="btn btn-error text-white   btn-sm "
                       onClick={() => {
@@ -138,21 +155,29 @@ function Home() {
                     >
                       &lt;
                     </button>
-                    <div>
-                      <figure>
-                        <img
-                          src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MK2J3?wid=1144&hei=1144&fmt=jpeg&qlt=95&.v=1634663503000"
-                          alt="Image 1"
-                          className="w-7/12"
-                        />
-                      </figure>
-                      <div className="card-body p-3">
-                        <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
-                          Beats Studio Buds + <br />
-                          <div className="badge bg-green-400 p-3">NEW</div>
-                        </h2>
+                    <Link to="/earbuds">
+                      <div
+                        onClick={() => {
+                          dispatch(selectProductFormNav("Beats Studio Buds +"));
+                          dispatch(selectCategory("Earbuds"));
+                        }}
+                      >
+                        <figure>
+                          <img
+                            src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MQLH3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1682361480584"
+                            alt="Image 1"
+                            className="w-7/12"
+                          />
+                        </figure>
+                        <div className="card-body p-3">
+                          <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
+                            Beats Studio Buds +<br />
+                            <div className="badge bg-green-400 p-3">NEW</div>
+                          </h2>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
+
                     <button
                       className="btn btn-error text-white   btn-sm "
                       onClick={() => {
@@ -191,21 +216,28 @@ function Home() {
                     >
                       &lt;
                     </button>
-                    <div>
-                      <figure>
-                        <img
-                          src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MY582?wid=1144&hei=1144&fmt=jpeg&qlt=95&.v=1604515400000"
-                          alt="Image 1"
-                          className="w-7/12"
-                        />
-                      </figure>
-                      <div className="card-body p-3">
-                        <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
-                          Beats Studio Buds
-                          <div className="badge bg-green-400 p-3">NEW</div>
-                        </h2>
+                    <Link to="/earbuds">
+                      <div
+                        onClick={() => {
+                          dispatch(selectProductFormNav("Beats Studio Buds"));
+                          dispatch(selectCategory("Earbuds"));
+                        }}
+                      >
+                        <figure>
+                          <img
+                            src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MJ503?wid=1144&hei=1144&fmt=jpeg&qlt=95&.v=1621538312000"
+                            alt="Image 1"
+                            className="w-7/12"
+                          />
+                        </figure>
+                        <div className="card-body p-3">
+                          <h2 className="card-title  text-lg flex flex-col-reverse justify-end">
+                            Beats Studio Buds
+                            <div className="badge bg-green-400 p-3">NEW</div>
+                          </h2>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                     <button
                       className="btn btn-error text-white   btn-sm "
                       onClick={() => {
@@ -232,7 +264,12 @@ function Home() {
           <p className="mt-2 text-2xl">Category</p>
           <div className="flex justify-center items-center mt-5 mb-2">
             <Link to="/headphone">
-              <div className="flex flex-col justify-center items-center  w-11/12 m-2 rounded-lg">
+              <div
+                onClick={() => {
+                  dispatch(selectCategory("Headphone"));
+                }}
+                className="flex flex-col justify-center items-center  w-11/12 m-2 rounded-lg"
+              >
                 <img
                   src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MQTR3?wid=890&hei=890&fmt=jpeg&qlt=90&.v=1687660671097"
                   alt="headphone"
@@ -242,7 +279,12 @@ function Home() {
               </div>
             </Link>
             <Link to="/earbuds">
-              <div className=" flex flex-col justify-center items-center  w-11/12 m-2 rounded-lg">
+              <div
+                onClick={() => {
+                  dispatch(selectCategory("Earbuds"));
+                }}
+                className=" flex flex-col justify-center items-center  w-11/12 m-2 rounded-lg"
+              >
                 <img
                   src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MJ503?wid=890&hei=890&fmt=jpeg&qlt=95&.v=1621538312000"
                   alt="headphone"

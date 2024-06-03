@@ -1,18 +1,7 @@
 function Footer() {
   return (
-    <div className="w-full">
-      {/* <div className="bg-slate-500 text-slate-200 text-sm">
-        <p>OPEN EVERY DAY 10AM – 5PM</p>
-        <p>
-          ADDRESS
-          <br />
-          99/99 Convent Road, Silom, Bangrak, Bangkok 10500, Thailand
-        </p>
-        <p>
-          TELEPHONE <br /> 099-999-9999
-        </p>
-      </div> */}
-      <footer className="footer p-5 bg-white text-red-600">
+    <>
+      <footer className="footer p-5 bg-white text-red-600 ">
         <aside>
           <svg
             width="50"
@@ -77,7 +66,7 @@ function Footer() {
           </div>
         </nav>
       </footer>
-    </div>
+    </>
   );
 }
 

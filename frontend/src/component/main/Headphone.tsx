@@ -3,6 +3,8 @@ import Footer from "../footer/Footer";
 import Nav from "../header/Nav";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProductFormNav, selectCategory } from "../redux/slicer.ts";
 const API = "http://localhost:3003";
 interface headphone {
   brand: string;
@@ -26,10 +28,25 @@ interface headphone {
   colorCode: string[];
   price: string;
 }
+interface state {
+  productData: {
+    productData: string;
+    category: string;
+    error: boolean;
+    loading: boolean;
+  };
+}
 function Headphone() {
+  const dispatch = useDispatch();
+  const productData = useSelector(
+    (state: state) => state.productData.productData
+  );
+  const category = useSelector((state: state) => state.productData.category);
   const [headphone, setHeadphone] = useState([]);
   const [pickColorPro, setPickColorPro] = useState("black");
-  const [selectProduct, setSelectProduct] = useState("Beats Solo 4");
+  const [selectProduct, setSelectProduct] = useState(
+    productData || "Beats Solo 4"
+  );
   const getData = async () => {
     try {
       const data = (await axios.get(`${API}/headphone`)).data;
@@ -39,15 +56,35 @@ function Headphone() {
     }
   };
   useEffect(() => {
+    setSelectProduct(productData);
+  }, [productData]);
+  useEffect(() => {
     getData();
   }, []);
+  useEffect(() => {
+    if (productData !== null) {
+      setSelectProduct(productData);
+    } else {
+      setSelectProduct("Beats Solo 4");
+    }
+  }, [productData]);
   return (
     <>
       <Nav></Nav>
-      <section className="flex flex-col justify-start items-center bg-red-500 h-full">
-        <div className="flex justify-center items-center gap-10 ">
+      <section className="flex flex-col justify-start items-center bg-red-500 ">
+        <div className="flex justify-center items-center gap-4 mt-2">
           <Link to="/headphone">
-            <div className="flex flex-col justify-center items-center text-white">
+            <div
+              className={`flex flex-col justify-center items-center w-28 ${
+                category === "Headphone"
+                  ? "text-black bg-white p-1 rounded-lg duration-150"
+                  : "text-white p-1 duration-150"
+              } `}
+              onClick={() => {
+                dispatch(selectProductFormNav(null));
+                dispatch(selectCategory("Headphone"));
+              }}
+            >
               <svg
                 width="60"
                 height="60"
@@ -88,7 +125,13 @@ function Headphone() {
             </div>
           </Link>
           <Link to="/earbuds">
-            <div className="flex flex-col justify-center items-center text-white">
+            <div
+              className="flex flex-col justify-center items-center text-white w-28"
+              onClick={() => {
+                dispatch(selectProductFormNav(null));
+                dispatch(selectCategory("Earbuds"));
+              }}
+            >
               <svg
                 width="60"
                 height="60"
@@ -131,21 +174,25 @@ function Headphone() {
         </div>
         {headphone.length !== 0 ? (
           <>
-            <div className="bg-white w-11/12 max-w-md mt-5 rounded-lg mb-5 flex flex-col p-3 justify-center items-center">
+            <div className="bg-white w-11/12 max-w-md mt-3 rounded-lg flex flex-col mb-5 p-3 justify-center items-center">
               <p className="text-2xl font-bold mb-5">Wireless HeadPhones</p>
               <div className="flex justify-center items-center gap-5">
                 {headphone.map((product: headphone) => {
                   return (
                     <>
-                      <button
+                      <p
                         onClick={() => {
                           setSelectProduct(product.name);
                           setPickColorPro("black");
                         }}
-                        className="font-bold"
+                        className={`font-bold text-sm text-center cursor-pointer h-7 duration-75 ${
+                          product.name === selectProduct
+                            ? "border-b-2 border-black"
+                            : ""
+                        }`}
                       >
                         {product.name}
-                      </button>
+                      </p>
                     </>
                   );
                 })}
@@ -194,36 +241,99 @@ function Headphone() {
                           <p className="text-xl w-10/12 font-bold">
                             {product.name}
                           </p>
-                          <p>${product.price}</p>
+                          <p className="font-bold mt-3">${product.price}</p>
                           <p className="mt-3 text-md font-semibold uppercase">
                             {pickColorPro}
                           </p>
-                          <div className="flex justify-center items-center gap-5 m-5">
+                          <div className="flex justify-center items-center gap-5 m-2 h-16">
                             {product.colorCode.map((code, index) => {
                               return (
                                 <>
                                   <div
-                                    className={`bg-[#${code}] w-6 h-6 rounded-full border-slate-500/50 border-2`}
-                                    onClick={() => {
-                                      product.color.map((color, inx) => {
-                                        if (inx === index) {
-                                          setPickColorPro(color);
-                                        }
-                                      });
-                                    }}
-                                  >
-                                    {/* <div className="bg-[#28282B]"></div>
-                                <div className="bg-[#5A84CD]"></div>
-                                <div className="bg-[#F5D1C8]"></div>
-                                <div className="bg-[#DCD5CF]"></div>
-                                <div className="bg-[#363642]"></div>
-                                <div className="bg-[#4B403E]"></div>
-                                <div className="bg-[#1C1C1C]"></div> */}
-                                    {/* fix bug */}
-                                  </div>
+                                    key={index}
+                                    className={`bg-[#${code}] rounded-full border-2 duration-150${
+                                      product.color[index] === pickColorPro
+                                        ? " w-8 h-8  border-slate-700"
+                                        : " w-6 h-6 border-slate-400/50"
+                                    }`}
+                                    onClick={() =>
+                                      setPickColorPro(product.color[index])
+                                    }
+                                  ></div>
+                                  {/* <div className="bg-[#28282B]"></div>
+                                        <div className="bg-[#5A84CD]"></div>
+                                        <div className="bg-[#F5D1C8]"></div>
+                                        <div className="bg-[#DCD5CF]"></div>
+                                        <div className="bg-[#3E4852]"></div>
+                                        <div className="bg-[#4B403E]"></div>
+                                        <div className="bg-[#1C1C1C]"></div> */}
+                                  {/* fix bug */}
                                 </>
                               );
                             })}
+                          </div>
+                          <div className="collapse bg-red-500 text-white  rounded-xl text-left justify-items-center">
+                            <input type="checkbox" />
+                            <div className="collapse-title text-lg font-bold uppercase ">
+                              <p className="mt-1"> highlights</p>
+                            </div>
+                            <div className="collapse-content text-sm font-medium rounded-lg mb-3 text-pretty bg-white text-black w-11/12 ">
+                              <p className="mt-2">
+                                {product.productInformation.highlights}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="collapse bg-red-500 mt-5 text-white rounded-xl text-left justify-items-center">
+                            <input type="checkbox" />
+                            <div className="collapse-title text-lg font-bold uppercase ">
+                              <p className="mt-1">What’s in the Box</p>
+                            </div>
+                            <div className="collapse-content text-sm font-medium rounded-lg mb-3 text-pretty bg-white text-black w-11/12 ">
+                              <p className="mt-2">
+                                {product.productInformation.box.map((items) => {
+                                  return (
+                                    <>
+                                      <li>{items}</li>
+                                    </>
+                                  );
+                                })}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="collapse bg-red-500 mt-5 text-white rounded-xl  text-left justify-items-center">
+                            <input type="checkbox" />
+                            <div className="collapse-title text-lg font-bold uppercase ">
+                              <p className="mt-1">Tech Specs</p>
+                            </div>
+                            <div className="collapse-content text-sm font-medium rounded-lg mb-3 text-balance bg-white text-black w-11/12 ">
+                              <p className=" mt-2 mb-1">
+                                Height :{" "}
+                                {product.productInformation.techSpecs.height}
+                              </p>
+                              <p className="mb-1">
+                                Length :{" "}
+                                {product.productInformation.techSpecs.length}
+                              </p>
+                              <p className="mb-1">
+                                Width :{" "}
+                                {product.productInformation.techSpecs.width}
+                              </p>
+                              <p className="mb-1">
+                                Weight :{" "}
+                                {product.productInformation.techSpecs.weight}
+                              </p>
+                              <p className="mb-1">
+                                Connections :{" "}
+                                {
+                                  product.productInformation.techSpecs
+                                    .connections
+                                }
+                              </p>
+                              <p className="mb-1">
+                                Battery :{" "}
+                                {product.productInformation.techSpecs.battery}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </>
@@ -237,7 +347,7 @@ function Headphone() {
           </>
         ) : (
           <>
-            <div className="bg-white w-11/12 max-w-md mt-5 rounded-lg mb-5 flex justify-center items-center h-full">
+            <div className="bg-white w-11/12 max-w-md mt-3 rounded-lg mb-5 flex justify-center h-full items-center ">
               <span className="loading loading-spinner text-error w-20"></span>
             </div>
           </>

@@ -37,3 +37,12 @@ app.get("/earbuds", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+app.get("/headphone/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const headphone = await HeadPhone.findById(id);
+    res.status(200).json(headphone);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
