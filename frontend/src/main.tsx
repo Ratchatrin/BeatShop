@@ -6,6 +6,9 @@ import Headphone from "./component/main/Headphone.tsx";
 import Earbuds from "./component/main/Earbuds.tsx";
 import { Provider } from "react-redux";
 import store from "./component/redux/store.ts";
+import Login from "./component/header/Login.tsx";
+import SignIn from "./component/header/SignIn.tsx";
+import Cart from "./component/header/Cart.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +21,18 @@ const router = createBrowserRouter([
   {
     path: "/earbuds",
     element: <Earbuds></Earbuds>,
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/signIn",
+    element: <SignIn></SignIn>,
+  },
+  {
+    path: "/cart",
+    element: <Cart></Cart>,
   },
 ]);
 
