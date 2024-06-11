@@ -35,7 +35,7 @@ function Home() {
                     <Link to="/headphone">
                       <button
                         onClick={() => {
-                          dispatch(selectCategory("headphone"));
+                          dispatch(selectCategory("Headphone"));
                           dispatch(selectProductFormNav("Beats Solo 4"));
                         }}
                         className="btn text-white bg-red-500 border-none w-5/12 text-xl btn-md mt-3 "

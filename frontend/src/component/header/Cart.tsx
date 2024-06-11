@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import Footer from "../footer/Footer";
 import Nav from "./Nav";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 interface headphone {
   id: string;
   brand: string;
@@ -42,14 +44,37 @@ interface state {
   };
 }
 function Cart() {
-  const cart = useSelector((state: state) => state.productData.userData.cart);
+  const [cart, setCart] = useState<headphone[]>([]);
+  const userData = useSelector((state: state) => state.productData.userData);
+  //  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // const updateWindowWidth = () => {
+  //   setWindowWidth(window.innerWidth);
+  // };
+  const total = cart.map((product) => {
+    return product.price * product.quantity;
+  });
+  const finalTotal = total.reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+  const quantity = cart.map((product) => {
+    return product.quantity;
+  });
+  const totalAmount = quantity.reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+  const userCart = useSelector(
+    (state: state) => state.productData.userData.cart
+  );
+  useEffect(() => {
+    setCart(userData.cart);
+  }, [userData]);
   return (
     <>
       <Nav></Nav>
       <section className="flex flex-col justify-start items-center bg-red-500 w-full ">
         <div className="bg-white w-11/12 max-w-lg mt-3 rounded-lg flex flex-col mb-5 p-3 justify-center items-center">
           <p className="font-bold text-2xl mb-5">Cart</p>
-          {cart.map((product) => {
+          {userCart.map((product) => {
             return (
               <>
                 <div className="flex mb-5 bg-red-500 p-2 rounded-lg">
@@ -68,6 +93,26 @@ function Cart() {
               </>
             );
           })}
+          <div className="flex flex-col justify-end items-center h-fit p-3 w-full">
+            <div className="text-center border-b-2 w-full pb-2 border-b-slate-400">
+              <p className="text-lg text-pretty font-bold">
+                Order Items <p className=" text-2xl ">{totalAmount} Item</p>
+              </p>
+            </div>
+            <p className="text-2xl mt-5 text-pretty font-bold  ">
+              Total Price : <span>$ {finalTotal}</span>
+            </p>
+            <div>
+              <button className="btn bg-green-400 mt-5 text-xl w-full h-full">
+                Check Out
+              </button>
+              <Link to="/">
+                <button className="btn btn-active bg-red-500 text-white mt-5 text-xl w-full h-full p-1">
+                  Continue Shopping
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
       <Footer></Footer>

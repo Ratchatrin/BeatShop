@@ -64,6 +64,7 @@ function HeadphoneXl() {
   const [selectProduct, setSelectProduct] = useState(
     productData || "Beats Solo 4"
   );
+  const [addComplete, setAddComplete] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [indexPicture, setIndexPicture] = useState(Number);
   const navigator = useNavigate();
@@ -95,6 +96,10 @@ function HeadphoneXl() {
           total: detail.price * quantity,
           colorCode: colorCode,
         };
+        setAddComplete(true);
+        setTimeout(() => {
+          setAddComplete(false);
+        }, 2000);
         dispatch(addCart(product));
         const add = await axios.put(`${API}/cart/add/${userData._id}`, product);
         console.log(add);
@@ -272,14 +277,29 @@ function HeadphoneXl() {
                                     -
                                   </button>
                                 </div> */}
-                                <button
-                                  onClick={() => {
-                                    addToCart(product);
-                                  }}
-                                  className="hover:text-black hover:bg-transparent border-2 border-green-500 hover:border-green-500 btn bg-green-500 rounded-xl w-28 text-white"
-                                >
-                                  Add to cart
-                                </button>
+                                {addComplete ? (
+                                  <>
+                                    <button
+                                      onClick={() => {
+                                        addToCart(product);
+                                      }}
+                                      className="hover:text-black hover:bg-green-200  hover:border-green-500 btn bg-green-500 rounded-xl w-28 text-white"
+                                    >
+                                      Add Complete
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      onClick={() => {
+                                        addToCart(product);
+                                      }}
+                                      className="hover:text-black hover:bg-green-200  hover:border-green-500 btn bg-green-500 rounded-xl w-28 text-white"
+                                    >
+                                      Add to cart
+                                    </button>
+                                  </>
+                                )}
                               </div>
                             </div>
                           </div>

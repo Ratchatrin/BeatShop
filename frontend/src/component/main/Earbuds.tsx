@@ -74,6 +74,7 @@ function Earbuds() {
   const [quantity, setQuantity] = useState<number>(1);
   const [indexPicture, setIndexPicture] = useState(Number);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [addComplete, setAddComplete] = useState(false);
   const navigator = useNavigate();
   const updateWindowWidth = () => {
     setWindowWidth(window.innerWidth);
@@ -108,6 +109,10 @@ function Earbuds() {
           total: detail.price * quantity,
           colorCode: colorCode,
         };
+        setAddComplete(true);
+        setTimeout(() => {
+          setAddComplete(false);
+        }, 2000);
         dispatch(addCart(product));
         const add = await axios.put(`${API}/cart/add/${userData._id}`, product);
         console.log(add);
@@ -361,14 +366,29 @@ function Earbuds() {
                                       -
                                     </button>
                                   </div> */}
-                                  <button
-                                    onClick={() => {
-                                      addToCart(product);
-                                    }}
-                                    className="btn bg-green-500 rounded-xl w-28 text-white"
-                                  >
-                                    Add to cart
-                                  </button>
+                                  {addComplete ? (
+                                    <>
+                                      <button
+                                        onClick={() => {
+                                          addToCart(product);
+                                        }}
+                                        className="btn bg-transparent rounded-xl w-28 border-2 border-green-500"
+                                      >
+                                        Add Complete
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <button
+                                        onClick={() => {
+                                          addToCart(product);
+                                        }}
+                                        className="btn bg-green-500 rounded-xl w-28 text-white"
+                                      >
+                                        Add to cart
+                                      </button>
+                                    </>
+                                  )}
                                 </div>
                               </div>
                               <div className="flex justify-center items-center gap-5 m-2 h-16">
