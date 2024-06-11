@@ -113,3 +113,20 @@ app.put("/cart/add/:userId", async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+app.put("/resetpassword", async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    const checkUser = await User.findOne({ email: email });
+    if (checkUser) {
+      const newUser = await User.findByIdAndUpdate(checkUser._id, {
+        $set: { password: newPassword },
+      });
+      res.status(200).json(newUser);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+    console.log(checkUser);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});

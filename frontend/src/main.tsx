@@ -9,6 +9,7 @@ import store from "./component/redux/store.ts";
 import Login from "./component/header/Login.tsx";
 import SignIn from "./component/header/SignIn.tsx";
 import Cart from "./component/header/Cart.tsx";
+import Reset from "./component/header/Reset.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart></Cart>,
+  },
+  {
+    path: "/resetPassword",
+    element: <Reset></Reset>,
   },
 ]);
 

@@ -122,10 +122,12 @@ function Login() {
               </a>
             </div>
           </Link>
-          <div className="flex justify-evenly -3 mb-3 mt-3">
-            <p>Reset Password</p>
-            <p className="ml-5 underline text-red-500">Click</p>
-          </div>{" "}
+          <Link to="/resetPassword">
+            <div className="flex justify-evenly -3 mb-3 mt-3">
+              <p>Reset Password</p>
+              <p className="ml-5 underline text-red-500">Click</p>
+            </div>
+          </Link>{" "}
           {emptyInput ? (
             <>
               <div role="alert" className="alert bg-red-500 mt-5 rounded-lg">
