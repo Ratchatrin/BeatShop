@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductFormNav, selectCategory } from "../redux/slicer.ts";
 import { addCart } from "../redux/slicer.ts";
-const API = "http://localhost:3003";
+const API = "https://beatshop.onrender.com";
 interface headphone {
   _id: string;
   brand: string;

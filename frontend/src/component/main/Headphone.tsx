@@ -10,7 +10,7 @@ import {
   addCart,
 } from "../redux/slicer.ts";
 import HeadphoneXl from "./HeadphoneXl.tsx";
-const API = "http://localhost:3003";
+const API = "https://beatshop.onrender.com";
 interface headphone {
   _id: string;
   brand: string;
