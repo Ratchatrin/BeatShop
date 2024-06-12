@@ -310,7 +310,7 @@ function Nav() {
                 />
               </div>
             </Link>
-            <div className="flex justify-evenly items-center mr-5 font-bold text-xl w-5/12 max-w-md grow">
+            <div className="flex gap-4 justify-evenly items-center mr-5 font-bold text-xl w-5/12 max-w-md grow">
               <div className="dropdown dropdown-bottom dropdown-end">
                 <p
                   tabIndex={0}

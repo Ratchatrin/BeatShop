@@ -109,7 +109,8 @@ function Login() {
             </div>
           </label>
           <button
-            className="btn bg-red-500 mt-5 pl-5 pr-5 text-white rounded-xl"
+            className="btn bg-red-500 mt-5 pl-5 pr-5 text-white rounded-xl hover:bg-transparent 
+            hover:border-2 hover:border-red-500 hover:text-red-500"
             onClick={userLogin}
           >
             Login

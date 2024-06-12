@@ -46,10 +46,6 @@ interface state {
 function Cart() {
   const [cart, setCart] = useState<headphone[]>([]);
   const userData = useSelector((state: state) => state.productData.userData);
-  //  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const updateWindowWidth = () => {
-  //   setWindowWidth(window.innerWidth);
-  // };
   const total = cart.map((product) => {
     return product.price * product.quantity;
   });
@@ -103,11 +99,11 @@ function Cart() {
               Total Price : <span>$ {finalTotal}</span>
             </p>
             <div>
-              <button className="btn bg-green-400 mt-5 text-xl w-full h-full">
+              <button className="btn hover:bg-green-200 hover:border-2 hover:border-green-500 bg-green-400 mt-5 text-xl w-full h-full rounded-lg">
                 Check Out
               </button>
               <Link to="/">
-                <button className="btn btn-active bg-red-500 text-white mt-5 text-xl w-full h-full p-1">
+                <button className="btn hover:bg-red-200 hover:border-2 hover:border-red-500 btn-active bg-red-500  mt-5 rounded-lg text-xl w-full h-full p-1">
                   Continue Shopping
                 </button>
               </Link>
