@@ -57,7 +57,7 @@ function Login() {
     <>
       <Nav></Nav>
       <section className="flex flex-col justify-start items-center bg-red-500 w-full h-full ">
-        <div className="bg-white w-11/12 max-w-xl mt-10  p-5 flex flex-col justify-center items-center ">
+        <div className="rounded-lg bg-white w-11/12 max-w-xl mt-10  p-5 flex flex-col justify-center items-center ">
           <p className="w-full text-center font-bold text-3xl ">Login</p>
           <label className="form-control w-full max-w-xs ">
             <div className="label">
@@ -115,7 +115,7 @@ function Login() {
             Login
           </button>
           <Link to="/signIn">
-            <div className="flex justify-evenly mt-5">
+            <div className="flex justify-evenly mt-5 font-bold">
               <p>Don't Have Account ?</p>
               <a className="link link-hover ml-5 underline text-red-500">
                 Click
@@ -123,7 +123,7 @@ function Login() {
             </div>
           </Link>
           <Link to="/resetPassword">
-            <div className="flex justify-evenly -3 mb-3 mt-3">
+            <div className="flex justify-evenly -3 mb-3 mt-3 font-bold">
               <p>Reset Password</p>
               <p className="ml-5 underline text-red-500">Click</p>
             </div>

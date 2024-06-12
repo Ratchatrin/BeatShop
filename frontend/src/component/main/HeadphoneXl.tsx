@@ -406,7 +406,7 @@ function HeadphoneXl() {
                         <p className="text-xl m-6 uppercase font-bold">
                           You may also like
                         </p>
-                        <div className=" flex justify-center items-center font-bold  text-center">
+                        <div className="bg-red-500 p-2 rounded-lg gap-2 flex justify-center items-start font-bold  text-center">
                           {earbuds.map((product: headphone) => {
                             return (
                               <>
@@ -418,11 +418,12 @@ function HeadphoneXl() {
                                         selectProductFormNav(product.name)
                                       );
                                     }}
-                                    className="flex flex-col justify-center items-center "
+                                    className="flex flex-col justify-center text-white text-pretty  items-center "
                                   >
                                     <img
                                       src={product.picture.black[0]}
                                       alt=""
+                                      className="rounded-lg "
                                     />
                                     <p>{product.name}</p>
                                     <p>${product.price}</p>

@@ -196,7 +196,7 @@ function Earbuds() {
                 category === "Earbuds"
                   ? "text-black bg-white p-1 rounded-lg duration-150"
                   : "text-white p-1 duration-150"
-              } `}
+              } ${windowWidth >= 1024 ? "w-32 h-32" : "w-28"}`}
               onClick={() => {
                 dispatch(selectProductFormNav(null));
                 dispatch(selectCategory("Earbuds"));
@@ -525,11 +525,11 @@ function Earbuds() {
                               <p className="text-xl m-6 uppercase font-bold">
                                 You may also like
                               </p>
-                              <div className="flex justify-center items-center font-bold  text-center">
+                              <div className="bg-red-500 p-2 rounded-lg gap-2 flex justify-center items-start font-bold  text-center">
                                 {headphone.map((product: earbuds) => {
                                   return (
                                     <>
-                                      <Link to="/headphone">
+                                      <Link to="/earbuds">
                                         <div
                                           onClick={() => {
                                             dispatch(
@@ -539,12 +539,12 @@ function Earbuds() {
                                               selectProductFormNav(product.name)
                                             );
                                           }}
-                                          className="flex flex-col justify-center items-center"
+                                          className="flex flex-col justify-center text-white text-pretty items-center text-sm "
                                         >
                                           <img
                                             src={product.picture.black[0]}
                                             alt=""
-                                            className="w-6/12"
+                                            className="rounded-lg w-6/12 max-w-md"
                                           />
                                           <p>{product.name}</p>
                                           <p>${product.price}</p>

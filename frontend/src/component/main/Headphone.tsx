@@ -141,7 +141,7 @@ function Headphone() {
         <div className="flex justify-center items-center gap-4 mt-2">
           <Link to="/headphone">
             <div
-              className={`flex flex-col justify-center items-center  ${
+              className={`flex flex-col justify-center items-center w-28 ${
                 category === "Headphone"
                   ? "text-black bg-white p-1 rounded-lg duration-150"
                   : "text-white p-1 duration-150"
@@ -513,7 +513,7 @@ function Headphone() {
                               <p className="text-xl m-6 uppercase font-bold">
                                 You may also like
                               </p>
-                              <div className=" flex justify-center gap-2 items-start font-bold  text-center">
+                              <div className="bg-red-500 p-2 rounded-lg gap-2 flex justify-center items-start font-bold  text-center">
                                 {earbuds.map((product: headphone) => {
                                   return (
                                     <>
@@ -525,11 +525,12 @@ function Headphone() {
                                               selectProductFormNav(product.name)
                                             );
                                           }}
-                                          className="flex flex-col text-xs justify-center items-center "
+                                          className="flex flex-col justify-center text-sm text-white text-pretty items-center "
                                         >
                                           <img
                                             src={product.picture.black[0]}
                                             alt=""
+                                            className="rounded-lg "
                                           />
                                           <p>{product.name}</p>
                                           <p>${product.price}</p>
