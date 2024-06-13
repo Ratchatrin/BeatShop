@@ -113,6 +113,116 @@ app.put("/cart/add/:userId", async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+app.put("/cart/add/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userFilter = await User.findById(userId);
+    const indexProduct = userFilter.cart.findIndex((product) => {
+      return (
+        product.id === req.body.id &&
+        product.name === req.body.name &&
+        product.color[0] === req.body.color[0]
+      );
+    });
+
+    if (indexProduct == -1) {
+      const userUpdate = await User.findByIdAndUpdate(userId, {
+        $push: { cart: req.body },
+      });
+    } else {
+      const userUpdateQuantity = await User.findByIdAndUpdate(userId, {
+        $set: {
+          [`cart.${indexProduct}.quantity`]:
+            userFilter.cart[indexProduct].quantity + req.body.quantity,
+        },
+      });
+      const userUpdateTotal = await User.findByIdAndUpdate(userId, {
+        $set: {
+          [`cart.${indexProduct}.total`]:
+            userFilter.cart[indexProduct].price *
+            (userFilter.cart[indexProduct].quantity + req.body.quantity),
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+app.put("/addByOne/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userFilter = await User.findById(userId);
+    const indexProduct = userFilter.cart.findIndex((product) => {
+      return (
+        product.id === req.body.id &&
+        product.name === req.body.name &&
+        product.color[0] === req.body.color[0]
+      );
+    });
+
+    if (indexProduct == -1) {
+      const userUpdate = await User.findByIdAndUpdate(userId, {
+        $push: { cart: req.body },
+      });
+    } else {
+      const userUpdateQuantity = await User.findByIdAndUpdate(userId, {
+        $set: {
+          [`cart.${indexProduct}.quantity`]: (userFilter.cart[
+            indexProduct
+          ].quantity += 1),
+        },
+      });
+      const userUpdateTotal = await User.findByIdAndUpdate(userId, {
+        $set: {
+          [`cart.${indexProduct}.total`]:
+            userFilter.cart[indexProduct].price *
+            (userFilter.cart[indexProduct].quantity + req.body.quantity),
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+app.put("/deleteByOne/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const userFilter = await User.findById(userId);
+    const indexProduct = userFilter.cart.findIndex((product) => {
+      return (
+        product.id === req.body.id &&
+        product.name === req.body.name &&
+        product.color[0] === req.body.color[0]
+      );
+    });
+
+    if (indexProduct == -1) {
+      const userUpdate = await User.findByIdAndUpdate(userId, {
+        $push: { cart: req.body },
+      });
+    } else {
+      const userUpdateQuantity = await User.findByIdAndUpdate(userId, {
+        $set: {
+          [`cart.${indexProduct}.quantity`]: (userFilter.cart[
+            indexProduct
+          ].quantity -= 1),
+        },
+      });
+      const userUpdateTotal = await User.findByIdAndUpdate(userId, {
+        $set: {
+          [`cart.${indexProduct}.total`]:
+            userFilter.cart[indexProduct].price *
+            (userFilter.cart[indexProduct].quantity + req.body.quantity),
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
 app.put("/resetpassword", async (req, res) => {
   try {
     const { email, newPassword } = req.body;

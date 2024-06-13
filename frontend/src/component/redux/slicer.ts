@@ -81,7 +81,38 @@ const productSlicer = createSlice({
       state.userData.username = action.payload;
       state.userData._id = action.payload
     },
+    userDelete: (state, action: { payload: headphone }) => { 
+      const newItem = action.payload;
+      const findProduct  = state.userData.cart.findIndex((prevProduct:headphone) => {
+        return (prevProduct.id === newItem.id
+          && prevProduct.color[0] === newItem.color[0] &&
+        prevProduct.name === newItem.name)
+      }
+      )
+
+      if (findProduct !== -1) {
+        state.userData!.cart[findProduct].quantity -= 1;
+        state.userData!.cart[findProduct].total =  state.userData!.cart[findProduct].quantity *  state.userData!.cart[findProduct].price  ;
+        if (state.userData!.cart[findProduct].quantity <= 0) {
+          state.userData!.cart.splice(findProduct, 1);
+        }
+      } 
+    },
+    userAdd: (state, action: { payload: headphone }) => { 
+      const newItem = action.payload;
+      const findProduct  = state.userData.cart.findIndex((prevProduct:headphone) => {
+        return (prevProduct.id === newItem.id
+          && prevProduct.color[0] === newItem.color[0] &&
+        prevProduct.name === newItem.name)
+      }
+      )
+
+      if (findProduct !== -1) {
+        state.userData!.cart[findProduct].quantity += 1;
+        state.userData!.cart[findProduct].total =  state.userData!.cart[findProduct].quantity *  state.userData!.cart[findProduct].price  ;
+      } 
+    },
   }
 })
-export const { selectProductFormNav ,selectCategory ,addCart ,loginUser,logoutUser} = productSlicer.actions 
+export const { selectProductFormNav ,selectCategory ,addCart ,loginUser,logoutUser ,userDelete ,userAdd} = productSlicer.actions 
 export default productSlicer.reducer

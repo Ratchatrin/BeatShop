@@ -3,6 +3,9 @@ import Footer from "../footer/Footer";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { userDelete, userAdd } from "../redux/slicer.ts";
+import axios from "axios";
 interface headphone {
   id: string;
   brand: string;
@@ -43,9 +46,11 @@ interface state {
     error: boolean;
   };
 }
+const API = "https://beatshop.onrender.com";
 function Cart() {
   const [cart, setCart] = useState<headphone[]>([]);
   const userData = useSelector((state: state) => state.productData.userData);
+  const dispatch = useDispatch();
   const total = cart.map((product) => {
     return product.price * product.quantity;
   });
@@ -61,6 +66,9 @@ function Cart() {
   const userCart = useSelector(
     (state: state) => state.productData.userData.cart
   );
+  const deleteCart = async (product: headphone) => {
+    await axios.put(`${API}/deleteByOne/:userId`, product);
+  };
   useEffect(() => {
     setCart(userData.cart);
   }, [userData]);
@@ -73,17 +81,43 @@ function Cart() {
           {userCart.map((product) => {
             return (
               <>
-                <div className="flex mb-5 bg-red-500 p-2 rounded-lg">
-                  <img
-                    src={product.picture[product.color][0]}
-                    alt=""
-                    className="rounded-lg w-4/12 mr-2"
-                  />
-                  <div className="flex flex-col justify-center  w-8/12 text-white">
-                    <p>{product.name}</p>
-                    <p>Color : {product.color}</p>
-                    <p>Quantity : {product.quantity}</p>
-                    <p>Total : ${product.total}</p>
+                <div className=" p-2 flex flex-col justify-center items-center mb-5 bg-red-500 rounded-lg">
+                  <div className="flex justify-center items-center   p-2 ">
+                    <img
+                      src={product.picture[product.color][0]}
+                      alt=""
+                      className="rounded-lg w-5/12 h-full max-w-sm mr-2"
+                    />
+                    <div className="flex flex-col justify-center  w-10/12 text-white">
+                      <p className="font-bold mb-2">{product.model}</p>
+                      <p className="mb-2">Color : {product.color}</p>
+                      <p className="font-bold text-xl underline">
+                        Total : ${product.total.toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-center items-center bg-white w-10/12 rounded-lg p-2">
+                    <p>Quantity</p>
+                    <div className="flex justify-center items-center gap-5">
+                      <button
+                        onClick={() => {
+                          dispatch(userAdd(product));
+                        }}
+                        className="btn btn-sm bg-green-500 border-none hover:bg-green-200"
+                      >
+                        +
+                      </button>
+                      <p>{product.quantity}</p>
+                      <button
+                        onClick={() => {
+                          dispatch(userDelete(product));
+                          deleteCart(product);
+                        }}
+                        className="btn btn-sm bg-red-500 border-none hover:bg-red-200"
+                      >
+                        -
+                      </button>
+                    </div>
                   </div>
                 </div>
               </>
@@ -96,7 +130,7 @@ function Cart() {
               </p>
             </div>
             <p className="text-2xl mt-5 text-pretty font-bold  ">
-              Total Price : <span>$ {finalTotal}</span>
+              Total Price : <span>$ {finalTotal.toFixed(2)}</span>
             </p>
             <div>
               <button className="btn hover:bg-green-200 hover:border-2 hover:border-green-500 bg-green-400 mt-5 text-xl w-full h-full rounded-lg">
