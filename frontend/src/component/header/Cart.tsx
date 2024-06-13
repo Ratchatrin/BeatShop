@@ -38,6 +38,7 @@ interface state {
     productData: headphone | null;
     category: string;
     userData: {
+      _id: string;
       email: null | string;
       username: null | string;
       cart: headphone[];
@@ -68,14 +69,14 @@ function Cart() {
   );
   const deleteCart = async (product: headphone) => {
     try {
-      await axios.put(`${API}/deleteByOne/:userId`, product);
+      await axios.put(`${API}/deleteByOne/${userData._id}`, product);
     } catch (error) {
       console.log(error);
     }
   };
   const addCart = async (product: headphone) => {
     try {
-      await axios.put(`${API}/addByOne/:userId`, product);
+      await axios.put(`${API}/addByOne/${userData._id}`, product);
     } catch (error) {
       console.log(error);
     }
