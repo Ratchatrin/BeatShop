@@ -67,7 +67,18 @@ function Cart() {
     (state: state) => state.productData.userData.cart
   );
   const deleteCart = async (product: headphone) => {
-    await axios.put(`${API}/deleteByOne/:userId`, product);
+    try {
+      await axios.put(`${API}/deleteByOne/:userId`, product);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addCart = async (product: headphone) => {
+    try {
+      await axios.put(`${API}/addByOne/:userId`, product);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     setCart(userData.cart);
@@ -102,6 +113,7 @@ function Cart() {
                       <button
                         onClick={() => {
                           dispatch(userAdd(product));
+                          addCart(product);
                         }}
                         className="btn btn-sm bg-green-500 border-none hover:bg-green-200"
                       >
