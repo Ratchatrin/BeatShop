@@ -45,7 +45,7 @@ function SignIn() {
     <>
       <Nav></Nav>
       <section className="flex flex-col justify-start items-center bg-red-500 w-full h-full ">
-        <div className="bg-white w-11/12  mt-10  p-5 flex flex-col justify-center items-center rounded-lg">
+        <div className="bg-white w-11/12 max-w-xl  mt-10  p-5 flex flex-col justify-center items-center rounded-lg">
           <p className="w- full text-center font-bold text-3xl ">SignIn</p>
           <label className="form-control w-full max-w-xs">
             <div className="label">
