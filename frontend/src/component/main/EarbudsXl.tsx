@@ -394,10 +394,10 @@ function EarbudsXl() {
                       {headphone.map((product: earbuds) => {
                         return (
                           <>
-                            <Link to="/earbuds">
+                            <Link to="/headphone">
                               <div
                                 onClick={() => {
-                                  dispatch(selectCategory("Earbuds"));
+                                  dispatch(selectCategory("Headphone"));
                                   dispatch(selectProductFormNav(product.name));
                                 }}
                                 className="flex flex-col justify-center text-white text-pretty  items-center "
