@@ -233,13 +233,23 @@ function EarbudsXl() {
                                       setColorCode(code);
                                     }}
                                   ></div>
-                                  {/* <div className="bg-[#28282B]"></div>
-                                        <div className="bg-[#26263D]"></div>
-                                        <div className="bg-[#F5D1C8]"></div>
-                                        <div className="bg-[#DCD5CF]"></div>
-                                        <div className="bg-[#3E4852]"></div>
-                                        <div className="bg-[#4B403E]"></div>
-                                        <div className="bg-[#1C1C1C]"></div> */}
+                                  {/* <div className="bg-[#000000]"></div>
+                                        <div className="bg-[#C0C0C0]"></div>
+                                        <div className="bg-[#F2EDE7]"></div>
+
+                                        <div className="bg-[#000000]"></div>
+                                        <div className="bg-[#FFFFFF]"></div>
+                                        <div className="bg-[#ed1c24]"></div>
+
+                                        <div className="bg-[#000000]"></div> 
+                                        <div className="bg-[#FFFFFF]"></div> 
+                                        <div className="bg-[#625589]"></div> 
+                                        <div className="bg-[#6C6C6D]"></div> 
+
+                                        <div className="bg-[#000000]"></div> 
+                                        <div className="bg-[#374754]"></div> 
+                                        <div className="bg-[#F7EDE2]"></div> 
+                                        */}
                                   {/* fix bug */}
                                 </>
                               );
