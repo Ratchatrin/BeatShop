@@ -333,6 +333,7 @@ function Nav() {
                               dispatch(
                                 selectProductFormNav("Beats Studio Buds +")
                               );
+                              dispatch(selectCategory("Earbuds"));
                             }}
                           >
                             <div className="w-48 flex  justify-start items-start text-pretty">
@@ -349,6 +350,7 @@ function Nav() {
                               dispatch(
                                 selectProductFormNav("Beats Studio Buds")
                               );
+                              dispatch(selectCategory("Earbuds"));
                             }}
                           >
                             <div className="w-48 flex  justify-start items-start text-pretty">
@@ -363,6 +365,7 @@ function Nav() {
                           <li
                             onClick={() => {
                               dispatch(selectProductFormNav("Beats Fit Pro"));
+                              dispatch(selectCategory("Earbuds"));
                             }}
                           >
                             <div className="w-48 flex  justify-start items-start text-pretty">
@@ -377,6 +380,7 @@ function Nav() {
                           <li
                             onClick={() => {
                               dispatch(selectProductFormNav("Power Beats Pro"));
+                              dispatch(selectCategory("Earbuds"));
                             }}
                           >
                             <div className="w-48 flex  justify-start items-start text-pretty">
@@ -402,6 +406,7 @@ function Nav() {
                               dispatch(
                                 selectProductFormNav("Beats Studio Pro")
                               );
+                              dispatch(selectCategory("Headphone"));
                             }}
                           >
                             <div className="w-48 flex  justify-start items-start text-pretty">
@@ -416,6 +421,7 @@ function Nav() {
                           <li
                             onClick={() => {
                               dispatch(selectProductFormNav("Beats Solo 4"));
+                              dispatch(selectCategory("Headphone"));
                             }}
                           >
                             <div className="w-48 flex  justify-start items-start text-pretty">
